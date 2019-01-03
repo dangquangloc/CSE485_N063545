@@ -1,23 +1,25 @@
 <?php
 	session_start(); 
-	include "header.php";
+	include "menu.php";
  ?>
 <?php require_once("demo/connection.php"); ?>
 <?php require_once("permission.php"); ?>
+
 <?php
 	if (isset($_POST["btn_submit"])) {
 		//lấy thông tin từ các form bằng phương thức POST
 		$title = $_POST["title"];
-		$content = $_POST["content"];
+		$content = $_POST["post_content"];
 		$is_public = 0;
 		$pay = $_POST["pay"];
+		$img = $_POST["img"];
 		if (isset($_POST["is_public"])) {
 			$is_public = $_POST["is_public"];
 		}
 		
 		$user_id = $_SESSION["user_id"];
  
-		$sql = "INSERT INTO posts(type,title, content, user_id, is_public, createdate, updatedate ) VALUES ('$pay', '$title', '$content', '$user_id', '$is_public', now(), now())";
+		$sql = "INSERT INTO posts(type,title, content, user_id, is_public, createdate,ImgData ) VALUES ('$pay', '$title', '$content', '$user_id', '$is_public', now(),'$img')";
 		// thực thi câu $sql với biến conn lấy từ file connection.php
 		mysqli_query($conn,$sql);
 		
@@ -60,8 +62,12 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 				<td><input type="text" id="title" name="title"></td>
 			</tr>
 			<tr>
+				<td nowrap="nowrap">link anh :</td>
+				<td><input type="text" id="img" name="img"></td>
+			</tr>
+			<tr>
 				<td nowrap="nowrap">Nội dung :</td>
-				<td><textarea name="content" id="content" rows="10" cols="150"></textarea></td>
+				<td><textarea name="post_content" id="post_content" rows="10" cols="150"></textarea></td>
 			</tr>
 			<tr>
 				<td nowrap="nowrap">Public bài viết ? :</td>
@@ -76,4 +82,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 		</table>
 		
 	</form>
-<?php include 'footer.php' ?>
+	<script>
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace( 'post_content' );
+</script>

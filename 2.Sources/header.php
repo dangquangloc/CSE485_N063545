@@ -5,6 +5,8 @@
 		<title>Tạo website bằng PHP</title>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		
+<script src="http://localhost/ckeditor/ckeditor.js"></script>
+		
 </head>
 	
 <body>		

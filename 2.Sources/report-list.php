@@ -14,13 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="fix/css/util.css">
 	<link rel="stylesheet" type="text/css" href="fix/css/main.css">
 <!--===============================================================================================-->
-<?php
-	session_start(); 
- ?>
-<?php require_once("demo/connection.php");?>
-<?php include("permission.php");?>
-
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 	<script src="http://localhost/ckeditor/ckeditor.js"></script>
     <title>Trang Quản Trị</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -34,8 +28,14 @@
  
     </style>
 
+<?php
+	session_start(); 
+	
+ ?>
+<?php require_once("demo/connection.php"); ?>
+<?php include("permission.php");?>
 
-    <div class="example" style ="height:20px ">
+<div class="example" style ="height:20px ">
             <div id="header">
                 <nav class="navbar navbar-inverse">
                     <div class="navbar-header">
@@ -46,6 +46,7 @@
                  
     </div>
 
+
 	<div class="limiter"style = " padding-right:4px;width:100%">
 		<div class="container-table100">
 			<div class="wrap-table100">
@@ -54,42 +55,63 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">User name</th>
-									<th class="cell100 column2">Email</th>
-									<th class="cell100 column3">Khóa tài khoản</th>
-									<th class="cell100 column4">Quyền</th>
-									<th class="cell100 column5">Hành động</th>
+									<th class="cell100 column1">Nội dung</th>
+									<th class="cell100 column2">User report</th>
+									<th class="cell100 column3">User</th>
+									<th class="cell100 column4">Name</th>
+									<th class="cell100 column5">ID_Repor</th>
+									<th class="cell100 column6">Hành Động</th>
 								</tr>
 							</thead>
 						</table>
 					</div>
 
+
+
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
 							<?php
-	$sql = "SELECT * FROM users";
+	$sql = "SELECT * FROM report";
 	$query = mysqli_query($conn,$sql);
 ?>
 <?php
-	if (isset($_GET["id_delete"])) {
-		$sql = "DELETE FROM users WHERE id = ".$_GET["id_delete"];
+	if (isset($_GET["id_accep"])) {
+		$sql = "DELETE FROM report WHERE report_id = ".$_GET["id_accep"];
 		mysqli_query($conn,$sql);
-	}
-	
+	}	
 ?>
-							<?php 
+
+<?php
+	$sql = "SELECT * FROM comment";
+	$query2 = mysqli_query($conn,$sql);
+?>
+<?php
+	if (isset($_GET["id_delete"])) {
+		$sql = "DELETE FROM comment WHERE cmt_id = ".$_GET["id_delete"];
+		mysqli_query($conn,$sql);
+	}	
+?>
+<?php
+	if (isset($_GET["id_delete"])) {
+		$sql = "DELETE FROM report WHERE cmt_id = ".$_GET["id_delete"];
+		mysqli_query($conn,$sql);
+	}	
+?>
+	<?php 
 		while ( $data = mysqli_fetch_array($query) ) {
 			$i = 1;
-			$id = $data['id'];
-	?>
-								<tr class="row100 body">
-									<td class="cell100 column1"><?php echo $data['username']; ?></td>
-									<td class="cell100 column2"><?php echo $data['email']; ?></td>
-									<td class="cell100 column3"><?php echo ($data['is_block'] == 1) ? "Bị khóa" : "Không bị khóa"; ?></td>
-									<td class="cell100 column4"><?php echo ($data['permision'] == 0) ? "Thành viên thường" : "Admin"; ?></td>
-									<td class="cell100 column5"><a href="chinh-sua-thanh-vien.php?id=<?php echo $id;?>">Sửa</a>
-																<a href="quan-ly-thanh-vien.php?id_delete=<?php echo $id;?>">Xóa</a></td>
+			$id = $data['report_id'];
+			$idd = $data['cmt_id']
+			
+	?>					<tr class="row100 body">
+									<td class="cell100 column1"><?php echo $data['cmtcontent']; ?></td>
+									<td class="cell100 column2"><?php echo $data['user_report']; ?></td>
+									<td class="cell100 column3"><?php echo $data['username']; ?></td>
+									<td class="cell100 column4"><?php echo $data['name']; ?></td>
+									<td class="cell100 column5"><?php echo $data['report_id']; ?></td>
+				 					<td class="cell100 column6"><a href="report-list.php?id_accep=<?php echo $id;?>">Accep</a>
+															<a href="report-list.php?id_delete=<?php echo $idd;?>">Delete</a></td>
 								</tr>
 								<?php 
 			$i++;
@@ -101,12 +123,8 @@
 						</table>
 					</div>
 				</div>
-			
-				
-
-
 <!--===============================================================================================-->	
-	<script src="fix/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="fix/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<script src="fix/vendor/bootstrap/js/popper.js"></script>
 	<script src="fixvendor/bootstrap/js/bootstrap.min.js"></script>
@@ -128,3 +146,7 @@
 <!--===============================================================================================-->
 	<script src="fix/js/main.js"></script>
 
+
+
+
+	

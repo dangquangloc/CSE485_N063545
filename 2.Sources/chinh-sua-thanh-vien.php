@@ -95,7 +95,6 @@
 			</tr>
  
 		</table>
-		
 	</form>
-	<?php } ?>
+		<?php } ?>
 <?php include "footer.php" ?>

@@ -4,7 +4,7 @@
 	</head>
 	<body>
 		
-	<form action="checklogin.php" method="post">
+	<form action="check-register.php" method="post">
 		<table>
 			<tr>
 				<td colspan="2">Form dang ky</td>
