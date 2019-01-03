@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2018 at 04:23 AM
+-- Generation Time: Jan 03, 2019 at 05:39 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -25,19 +25,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `comment`
 --
 
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `fullname` varchar(50) NOT NULL,
-  `createdate` datetime NOT NULL,
-  `is_block` tinyint(4) NOT NULL DEFAULT '0',
-  `permision` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+CREATE TABLE `comment` (
+  `user_id` int(10) DEFAULT NULL,
+  `cmtcontent` varchar(500) DEFAULT NULL,
+  `cmt_id` int(10) NOT NULL,
+  `idpost` int(10) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `name` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`user_id`, `cmtcontent`, `cmt_id`, `idpost`, `username`, `name`) VALUES
+(1, '', 37, 62, 'admin', 'admin'),
+(1, '', 38, 65, 'admin', 'admin');
 
 -- --------------------------------------------------------
 
@@ -52,8 +58,42 @@ CREATE TABLE `posts` (
   `user_id` int(11) DEFAULT NULL,
   `is_public` tinyint(4) DEFAULT '0',
   `createdate` datetime DEFAULT NULL,
-  `updatedate` datetime DEFAULT NULL
+  `updatedate` datetime DEFAULT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  `ImgData` char(250) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `posts`
+--
+
+INSERT INTO `posts` (`id`, `title`, `content`, `user_id`, `is_public`, `createdate`, `updatedate`, `type`, `ImgData`) VALUES
+(64, '', '', 12, 0, '2018-12-29 13:21:36', NULL, 1, ''),
+(63, '', '', 12, 0, '2018-12-29 13:21:31', NULL, 0, ''),
+(62, '2342rff', '<p>3efwfsdfsdfsdfsf</p>\r\n', 1, 0, '2018-12-29 12:55:46', NULL, 1, ''),
+(65, '', '<p>ad</p>\r\n', 1, 1, '2019-01-03 11:11:59', NULL, 1, 'images/anh1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `report`
+--
+
+CREATE TABLE `report` (
+  `report_id` int(11) NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `user_report` varchar(50) NOT NULL,
+  `cmtcontent` varchar(500) NOT NULL,
+  `cmt_id` int(10) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `report`
+--
+
+INSERT INTO `report` (`report_id`, `username`, `name`, `user_report`, `cmtcontent`, `cmt_id`) VALUES
+(36, 'admin', 'admin', 'loc', '', 38);
 
 -- --------------------------------------------------------
 
@@ -67,39 +107,42 @@ CREATE TABLE `users` (
   `password` varchar(30) NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `level` tinyint(4) NOT NULL,
-  `permision` tinyint(4) NOT NULL DEFAULT '0',
-  `is_block` tinyint(4) NOT NULL DEFAULT '0',
+  `permision` tinyint(4) DEFAULT '0',
+  `is_block` tinyint(4) DEFAULT '0',
   `createdate` datetime NOT NULL,
-  `activation` varchar(300) NOT NULL,
-  `status` enum('0','1') NOT NULL DEFAULT '0'
+  `activation` varchar(300) DEFAULT NULL,
+  `status` enum('0','1') DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `name`, `email`, `level`, `permision`, `is_block`, `createdate`, `activation`, `status`) VALUES
-(1, 'admin', 'admin', 'dang quang loc', 'loc4065@gamil.com', 0, 1, 0, '0000-00-00 00:00:00', '', '0'),
-(12, 'loc', 'loc', 'loc', 'loc4066@gmail.com', 0, 0, 0, '0000-00-00 00:00:00', 'f4549ab9203695513ee43074c365eec7', '1');
+INSERT INTO `users` (`id`, `username`, `password`, `name`, `email`, `permision`, `is_block`, `createdate`, `activation`, `status`) VALUES
+(1, 'admin', 'admin', 'admin', 'loc4065@gmail.com', 1, 0, '2018-12-12 11:31:27', '', '0'),
+(12, 'loc', 'loc', '', 'loc4066@gmail.com', 0, 0, '0000-00-00 00:00:00', 'f4549ab9203695513ee43074c365eec7', '1');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `admin`
+-- Indexes for table `comment`
 --
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`cmt_id`);
 
 --
 -- Indexes for table `posts`
 --
 ALTER TABLE `posts`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `report`
+--
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`report_id`);
 
 --
 -- Indexes for table `users`
@@ -113,16 +156,22 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for table `comment`
 --
-ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `comment`
+  MODIFY `cmt_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+
+--
+-- AUTO_INCREMENT for table `report`
+--
+ALTER TABLE `report`
+  MODIFY `report_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `users`
