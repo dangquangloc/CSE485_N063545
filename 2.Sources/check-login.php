@@ -49,7 +49,7 @@ if (isset($_SESSION['permision']) == true) {
 		}else{
 	   
 	   // nếu không phải admin chuyển đến trang client
-	   header('Location: lenhatquang-webtlu/demo.php');
+	   header('Location: index1.php');
 			}
 	}
 	

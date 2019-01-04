@@ -3,7 +3,7 @@
 			<?php
 	// Lấy 16 bài viết mới nhất đã được phép public ra ngoài từ bảng posts
 	$sql = "select * from posts where is_public = 1 order by createdate desc limit 16  ";
-	$sql = "select * from posts where type = 3  ";
+	$sql = "select * from posts where type = 1  ";
 	// Thực hiện truy vấn data thông qua hàm mysqli_query
 	$query = mysqli_query($conn,$sql);
 ?>
@@ -23,9 +23,8 @@
 							}
 					?>
 						<td >
-						<p style="font-family: 'Courier New', Courier, monospace;"><?php echo $data["title"];// In ra title bài viết ?><p>
+							<p style="font-family: 'Courier New', Courier, monospace;"><?php echo $data["title"];// In ra title bài viết ?><p>
 							<img src="<?php echo $data["ImgData"]; ?>" alt="" style=" width : 100%; height : 300px; ">
-	
 							<a href="display.php?id=<?php echo $data["id"]; // Tạo liên kết đến trang display.php và truyền vào id bài viết ?>"> Xem thêm</a>
 						
 						</td>
@@ -36,4 +35,3 @@
 					?>
 				</table>	
 			</div>
-		

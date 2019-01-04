@@ -52,9 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 				<td nowrap="nowrap">Chủ đề của món ăn :
 					<td><select  name="pay">
     					<option  value="">--Chọn--</option>
-    					<option <?php if (isset($pay) && $pay == '1')  ?> value="1">ngày lễ</option>
-						<option <?php if (isset($pay) && $pay == '2')  ?> value="2">đặc biệt</option>
-						<option <?php if (isset($pay) && $pay == '3')  ?> value="3">ngày thường</option>
+    					<option <?php if (isset($pay) && $pay == '1')  ?> value="1">gia đình</option>
+						<option <?php if (isset($pay) && $pay == '2')  ?> value="2">cặp đôi</option>
+						<option <?php if (isset($pay) && $pay == '3')  ?> value="3">dịp lễ</option>
 					</select></td>
 			</tr>	
 			<tr>

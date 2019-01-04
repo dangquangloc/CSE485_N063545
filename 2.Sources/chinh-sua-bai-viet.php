@@ -13,8 +13,9 @@
 		$is_public = 0;
  
 		$id = $_POST["id"];
+		$img = $_POST["img"];
 		// Viết câu lệnh cập nhật thông tin người dùng
-		$sql = "UPDATE posts SET title = '$title', content = '$content', is_public = '$is_public', type='$type',updatedate = now() WHERE id=$id";
+		$sql = "UPDATE posts SET title = '$title', content = '$content',ImgData ='$img' ,is_public = '$is_public', type='$type',updatedate = now() WHERE id=$id";
 		// thực thi câu $sql với biến conn lấy từ file connection.php
 		mysqli_query($conn,$sql);
 		header('Location: quan-ly-bai-viet.php');

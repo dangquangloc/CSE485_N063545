@@ -54,11 +54,10 @@
 							<thead>
 								<tr class="row100 head">
 									<th class="cell100 column1">Tiêu đề</th>
-									<th class="cell100 column2">Nội Dung</th>
-									<th class="cell100 column3">User_ID</th>
-									<th class="cell100 column4">Public</th>
-									<th class="cell100 column5">Thể loại</th>
-									<th class="cell100 column6">Hành Động</th>
+									<th class="cell100 column2">User_ID</th>
+									<th class="cell100 column3">Public</th>
+									<th class="cell100 column4">Thể loại</th>
+									<th class="cell100 column5">Hành Động</th>
 								</tr>
 							</thead>
 						</table>
@@ -86,11 +85,10 @@ $query = mysqli_query($conn,$sql);
 	?>
 								<tr class="row100 body">
 									<td class="cell100 column1"><?php echo $data['title']; ?></td>
-									<td class="cell100 column2"><?php echo $data['content']; ?></td>
-									<td class="cell100 column3"><?php echo ($data['user_id'] ) ; ?></td>
-									<td class="cell100 column4"><?php echo ($data['is_public'] ) ; ?></td>
-									<td class="cell100 column5"><?php echo ($data['type'] ) ; ?></td>
-				  <td class="cell100 column6"><a href="chinh-sua-bai-viet.php?id=<?php echo $id;?>">Sửa</a>
+									<td class="cell100 column2"><?php echo ($data['user_id'] ) ; ?></td>
+									<td class="cell100 column3"><?php echo ($data['is_public'] ) ; ?></td>
+									<td class="cell100 column4"><?php echo ($data['type'] ) ; ?></td>
+				  <td class="cell100 column5"><a href="chinh-sua-bai-viet.php?id=<?php echo $id;?>">Sửa</a>
 				  <a href="xoa-bai-viet?id_delete=<?php echo $id;?>">Xóa</a></td>
 								</tr>
 								<?php 

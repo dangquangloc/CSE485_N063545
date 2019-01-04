@@ -3,7 +3,6 @@
 	
  ?>
 <?php require_once("demo/connection.php"); ?>
-<?php include "header.php" ?>
 <?php
 if (isset($_SESSION['user_id']) == false) {
 	// Nếu người dùng chưa đăng nhập thì chuyển hướng website sang trang đăng nhập
@@ -26,8 +25,8 @@ if (isset($_SESSION['user_id']) == false) {
 			<div class="innertube">
 <?php 
 				while ( $data = mysqli_fetch_array($query) ) {
-?>
-					<h3><?php echo $data['title']; ?></h3></div></br>
+?>			
+
 					<i> Ngày tạo : <?php echo $data['createdate']; ?></i></br>
 					<p><?php echo $data['content']; ?></p></br>
 	
@@ -97,6 +96,4 @@ if (isset($_SESSION['user_id']) == false) {
 
  ?>
 			<?php } ?>
-			</div>
-		</main>
-<?php include "footer.php" ?>
+			
