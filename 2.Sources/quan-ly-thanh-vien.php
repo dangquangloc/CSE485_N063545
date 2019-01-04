@@ -68,12 +68,14 @@
 						<table>
 							<tbody>
 							<?php
-	$sql = "SELECT * FROM users";
+	$sql = "SELECT * FROM users ";
 	$query = mysqli_query($conn,$sql);
 ?>
-<?php
+<?php 
+if(isset($_GET['id_delete'])){
+ $id=$_GET['id_delete'];}
 	if (isset($_GET["id_delete"])) {
-		$sql = "DELETE FROM users WHERE id = ".$_GET["id_delete"];
+		$sql = "DELETE FROM users WHERE id = $id And  permision != 1";
 		mysqli_query($conn,$sql);
 	}
 	
@@ -86,7 +88,7 @@
 								<tr class="row100 body">
 									<td class="cell100 column1"><?php echo $data['username']; ?></td>
 									<td class="cell100 column2"><?php echo $data['email']; ?></td>
-									<td class="cell100 column3"><?php echo ($data['is_block'] == 1) ? "Bị khóa" : "Không bị khóa"; ?></td>
+
 									<td class="cell100 column4"><?php echo ($data['permision'] == 0) ? "Thành viên thường" : "Admin"; ?></td>
 									<td class="cell100 column5"><a href="chinh-sua-thanh-vien.php?id=<?php echo $id;?>">Sửa</a>
 																<a href="quan-ly-thanh-vien.php?id_delete=<?php echo $id;?>">Xóa</a></td>

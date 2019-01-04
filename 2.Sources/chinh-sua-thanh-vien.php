@@ -3,7 +3,7 @@
  ?>
 <?php require_once("demo/connection.php");?>
 <?php include("permission.php");?>
-<?php include ("header.php"); ?>
+
 <?php
 	if (isset($_POST["btn_submit"])) {
 		//lấy thông tin từ các form bằng phương thức POST
@@ -40,14 +40,12 @@
 		if ($id == 1) {
 			$select_2 = 'selected = "selected"';
 		}
-		if ($id == 2) {
-			$select_3 = 'selected = "selected"';
-		}
+		
 		$select = '<select id="permission" name="permission">
 						<option value="-1"></option>
 						<option value="0" '.$select_1.'>Thành viên thường</option>
-						<option value="1" '.$select_2.'>Admin cấp 1</option>
-						<option value="2" '.$select_3.'>Admin cấp 2</option>
+						<option value="1" '.$select_2.'>Admin </option>
+						
 					</select>';
  
 		return $select;
@@ -87,8 +85,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td nowrap="nowrap">Block người dùng :</td>
-				<td><input type="checkbox" id="is_block" name="is_block" value="1" <?php echo $is_block; ?> ></td>
+				
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input type="submit" name="btn_submit" value="Cập nhật thông tin"></td>
@@ -97,4 +94,3 @@
 		</table>
 	</form>
 		<?php } ?>
-<?php include "footer.php" ?>
